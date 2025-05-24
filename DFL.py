@@ -232,9 +232,9 @@ def main():
     lms_base_url = 'https://sci.cmb.ac.lk/lms/' 
     login_page_url = 'https://sci.cmb.ac.lk/lms/login/index.php' 
     
-    base_download_directory = '/Users/viduragunawardana/Documents/UOC/Sem5'
-    courses_csv_path = '/Users/viduragunawardana/Code/Python/Scripts/courses.csv'
-    env_file_path = '/Users/viduragunawardana/Code/Python/Scripts/env.txt'
+    base_download_directory = 'YOUR_DOWNLOAD_DIRECTORY'
+    courses_csv_path = 'YOUR_COURSES_CSV_PATH'
+    env_file_path = 'YOUR_ENV_FILE_PATH'
     # --- End Configuration ---
 
     username, password = load_credentials_from_env(env_file_path)

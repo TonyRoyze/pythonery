@@ -1,0 +1,107 @@
+{
+  "current_network": {
+    "nodes": 2688,
+    "edges": 2838,
+    "density": 0.0007858604923175076,
+    "clustering_coefficient": 0.0026043692520055315,
+    "is_connected": false,
+    "average_shortest_path": 4.833652882064183,
+    "diameter": 15,
+    "largest_component_size": 2127,
+    "num_components": 211,
+    "assortativity": -0.2408465160859132
+  },
+  "random_network": {
+    "nodes": 2688,
+    "edges": 3211,
+    "density": 0.0008891465964874971,
+    "clustering_coefficient": 0.0007564484126984126,
+    "is_connected": true,
+    "average_shortest_path": 9.946550133358144,
+    "diameter": 23,
+    "assortativity": -0.07223835138870399
+  },
+  "small_world_network": {
+    "nodes": 2688,
+    "edges": 2688,
+    "density": 0.000744324525493115,
+    "clustering_coefficient": 0.0,
+    "is_connected": true,
+    "average_shortest_path": 172.03105976527195,
+    "diameter": 476,
+    "assortativity": -0.06434695848392513
+  },
+  "scale_free_network": {
+    "nodes": 2688,
+    "edges": 2687,
+    "density": 0.000744047619047619,
+    "clustering_coefficient": 0.0,
+    "is_connected": true,
+    "average_shortest_path": 7.364190956900066,
+    "diameter": 19,
+    "assortativity": -0.07210187486466241
+  },
+  "diffusion_results": {
+    "current": {
+      "avg_infection_rate": 0.28686755952380955,
+      "std_infection_rate": 0.007199309563781306,
+      "avg_steps": 4.1,
+      "std_steps": 0.5385164807134504,
+      "max_infection_rate": 0.29985119047619047,
+      "min_infection_rate": 0.2741815476190476,
+      "simulation_count": 10
+    },
+    "random": {
+      "avg_infection_rate": 0.21168154761904762,
+      "std_infection_rate": 0.008776923976369023,
+      "avg_steps": 7.8,
+      "std_steps": 1.4,
+      "max_infection_rate": 0.23586309523809523,
+      "min_infection_rate": 0.2034970238095238,
+      "simulation_count": 10
+    },
+    "small_world": {
+      "avg_infection_rate": 0.10535714285714286,
+      "std_infection_rate": 0.0035597838434243104,
+      "avg_steps": 6.6,
+      "std_steps": 1.2806248474865698,
+      "max_infection_rate": 0.11235119047619048,
+      "min_infection_rate": 0.09970238095238096,
+      "simulation_count": 10
+    },
+    "scale_free": {
+      "avg_infection_rate": 0.2236235119047619,
+      "std_infection_rate": 0.007795563416112495,
+      "avg_steps": 4.5,
+      "std_steps": 0.5,
+      "max_infection_rate": 0.23214285714285715,
+      "min_infection_rate": 0.20424107142857142,
+      "simulation_count": 10
+    }
+  },
+  "comparative_analysis": {
+    "clustering_comparison": {
+      "current": 0.0026043692520055315,
+      "random": 0.0007564484126984126,
+      "small_world": 0.0,
+      "scale_free": 0.0
+    },
+    "path_length_comparison": {
+      "current": 4.833652882064183,
+      "random": 9.946550133358144,
+      "small_world": 172.03105976527195,
+      "scale_free": 7.364190956900066
+    },
+    "diffusion_efficiency": {
+      "current": 0.28686755952380955,
+      "random": 0.21168154761904762,
+      "small_world": 0.10535714285714286,
+      "scale_free": 0.2236235119047619
+    },
+    "network_characteristics": {
+      "primary_type": "random_like",
+      "clustering_level": "low",
+      "path_efficiency": "high"
+    }
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "graph_info": {
+    "original_nodes": 2688,
+    "original_edges": 2838,
+    "original_density": 0.0007858604923175076
+  },
+  "scalability_tests": {
+    "100": {
+      "nodes": 100,
+      "edges": 1,
+      "density": 0.00020202020202020202,
+      "performance": {
+        "centrality": {
+          "execution_time": 0.007008075714111328,
+          "memory_used": -2.015625,
+          "result_size": 200,
+          "nodes_processed": 100,
+          "edges_processed": 1
+        },
+        "community": {
+          "execution_time": 0.009672880172729492,
+          "memory_used": -0.125,
+          "result_size": 99,
+          "nodes_processed": 100,
+          "edges_processed": 1
+        },
+        "shortest_path": {
+          "execution_time": 0.001361846923828125,
+          "memory_used": 0.453125,
+          "result_size": 1,
+          "nodes_processed": 100,
+          "edges_processed": 1
+        },
+        "properties": {
+          "execution_time": 0.0010919570922851562,
+          "memory_used": 0.265625,
+          "result_size": 2,
+          "nodes_processed": 100,
+          "edges_processed": 1
+        }
+      }
+    },
+    "500": {
+      "nodes": 500,
+      "edges": 104,
+      "density": 0.0008336673346693386,
+      "performance": {
+        "centrality": {
+          "execution_time": 0.057797908782958984,
+          "memory_used": -13.046875,
+          "result_size": 1000,
+          "nodes_processed": 500,
+          "edges_processed": 104
+        },
+        "community": {
+          "execution_time": 0.053071022033691406,
+          "memory_used": -6.34375,
+          "result_size": 402,
+          "nodes_processed": 500,
+          "edges_processed": 104
+        },
+        "shortest_path": {
+          "execution_time": 0.030466794967651367,
+          "memory_used": -0.484375,
+          "result_size": 1,
+          "nodes_processed": 500,
+          "edges_processed": 104
+        },
+        "properties": {
+          "execution_time": 0.003095865249633789,
+          "memory_used": 0.015625,
+          "result_size": 2,
+          "nodes_processed": 500,
+          "edges_processed": 104
+        }
+      }
+    },
+    "1000": {
+      "nodes": 1000,
+      "edges": 482,
+      "density": 0.0009649649649649649,
+      "performance": {
+        "centrality": {
+          "execution_time": 0.9990808963775635,
+          "memory_used": 125.0625,
+          "result_size": 2000,
+          "nodes_processed": 1000,
+          "edges_processed": 482
+        },
+        "community": {
+          "execution_time": 0.0642859935760498,
+          "memory_used": -22.15625,
+          "result_size": 546,
+          "nodes_processed": 1000,
+          "edges_processed": 482
+        },
+        "shortest_path": {
+          "execution_time": 0.3068537712097168,
+          "memory_used": -25.921875,
+          "result_size": 1,
+          "nodes_processed": 1000,
+          "edges_processed": 482
+        },
+        "properties": {
+          "execution_time": 0.017530202865600586,
+          "memory_used": -7.03125,
+          "result_size": 2,
+          "nodes_processed": 1000,
+          "edges_processed": 482
+        }
+      }
+    },
+    "2000": {
+      "nodes": 2000,
+      "edges": 1300,
+      "density": 0.0006503251625812907,
+      "performance": {
+        "centrality": {
+          "execution_time": 0.15198326110839844,
+          "memory_used": -81.46875,
+          "result_size": 4000,
+          "nodes_processed": 2000,
+          "edges_processed": 1300
+        },
+        "community": {
+          "execution_time": 0.08171606063842773,
+          "memory_used": 4.59375,
+          "result_size": 828,
+          "nodes_processed": 2000,
+          "edges_processed": 1300
+        },
+        "shortest_path": {
+          "execution_time": 2.6827588081359863,
+          "memory_used": -16.5625,
+          "result_size": 1,
+          "nodes_processed": 2000,
+          "edges_processed": 1300
+        },
+        "properties": {
+          "execution_time": 0.008495807647705078,
+          "memory_used": 1.078125,
+          "result_size": 2,
+          "nodes_processed": 2000,
+          "edges_processed": 1300
+        }
+      }
+    },
+    "2688": {
+      "nodes": 2688,
+      "edges": 2838,
+      "density": 0.0007858604923175076,
+      "performance": {
+        "centrality": {
+          "execution_time": 0.8021676540374756,
+          "memory_used": 268.015625,
+          "result_size": 5376,
+          "nodes_processed": 2688,
+          "edges_processed": 2838
+        },
+        "community": {
+          "execution_time": 0.3011031150817871,
+          "memory_used": -258.265625,
+          "result_size": 241,
+          "nodes_processed": 2688,
+          "edges_processed": 2838
+        },
+        "shortest_path": {
+          "execution_time": 17.8974928855896,
+          "memory_used": -13.21875,
+          "result_size": 1,
+          "nodes_processed": 2688,
+          "edges_processed": 2838
+        },
+        "properties": {
+          "execution_time": 0.021463632583618164,
+          "memory_used": 1.203125,
+          "result_size": 2,
+          "nodes_processed": 2688,
+          "edges_processed": 2838
+        }
+      }
+    }
+  },
+  "distributed_processing": {
+    "dask_available": false,
+    "tests_performed": [],
+    "note": "Dask not available for distributed processing"
+  },
+  "scaling_analysis": {
+    "algorithms": {
+      "centrality": {
+        "sizes": [
+          100,
+          500,
+          1000,
+          2000,
+          2688
+        ],
+        "execution_times": [
+          0.007008075714111328,
+          0.057797908782958984,
+          0.9990808963775635,
+          0.15198326110839844,
+          0.8021676540374756
+        ],
+        "memory_usage": [
+          -2.015625,
+          -13.046875,
+          125.0625,
+          -81.46875,
+          268.015625
+        ],
+        "time_complexity": "quadratic",
+        "memory_complexity": "sub_linear",
+        "scalability_rating": "excellent"
+      },
+      "community": {
+        "sizes": [
+          100,
+          500,
+          1000,
+          2000,
+          2688
+        ],
+        "execution_times": [
+          0.009672880172729492,
+          0.053071022033691406,
+          0.0642859935760498,
+          0.08171606063842773,
+          0.3011031150817871
+        ],
+        "memory_usage": [
+          -0.125,
+          -6.34375,
+          -22.15625,
+          4.59375,
+          -258.265625
+        ],
+        "time_complexity": "linear",
+        "memory_complexity": "sub_linear",
+        "scalability_rating": "excellent"
+      },
+      "shortest_path": {
+        "sizes": [
+          100,
+          500,
+          1000,
+          2000,
+          2688
+        ],
+        "execution_times": [
+          0.001361846923828125,
+          0.030466794967651367,
+          0.3068537712097168,
+          2.6827588081359863,
+          17.8974928855896
+        ],
+        "memory_usage": [
+          0.453125,
+          -0.484375,
+          -25.921875,
+          -16.5625,
+          -13.21875
+        ],
+        "time_complexity": "super_quadratic",
+        "memory_complexity": "sub_linear",
+        "scalability_rating": "fair"
+      },
+      "properties": {
+        "sizes": [
+          100,
+          500,
+          1000,
+          2000,
+          2688
+        ],
+        "execution_times": [
+          0.0010919570922851562,
+          0.003095865249633789,
+          0.017530202865600586,
+          0.008495807647705078,
+          0.021463632583618164
+        ],
+        "memory_usage": [
+          0.265625,
+          0.015625,
+          -7.03125,
+          1.078125,
+          1.203125
+        ],
+        "time_complexity": "linear",
+        "memory_complexity": "sub_linear",
+        "scalability_rating": "excellent"
+      }
+    },
+    "overall_patterns": {
+      "overall_complexity": "quadratic",
+      "scalability_trend": "linear",
+      "recommended_max_size": 5376
+    },
+    "bottlenecks": []
+  },
+  "recommendations": {
+    "performance_optimization": [
+      "centrality shows quadratic scaling - consider parallel processing",
+      "shortest_path shows super_quadratic scaling - consider parallel processing"
+    ],
+    "distributed_processing": [
+      "Consider installing Dask for distributed processing capabilities"
+    ],
+    "resource_management": [
+      "Recommended maximum graph size for current setup: 5376 nodes"
+    ]
+  }
+}

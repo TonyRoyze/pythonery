@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.pipenv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode settings
+.vscode/
+.kiro/
+
+
+# Mac system files
+.DS_Store
+
+# Environment/config files
+env.txt
+
+# Downloaded files and logs
+downloads/
+*.log
+
+
+# Folders and Files
+analysis_reports/
+TASK_EXPLANATIONS.md
+
+# CSVs with course info (may contain sensitive info)
+
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+

@@ -1,0 +1,44 @@
+# Core dependencies
+networkx>=2.8
+pandas>=1.5.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Machine Learning
+scikit-learn>=1.1.0
+torch>=1.12.0
+torch-geometric>=2.1.0
+torch-scatter>=2.0.9
+torch-sparse>=0.6.16
+
+# Graph Analysis
+community>=0.15
+python-louvain>=0.16
+
+# Distributed Processing
+dask>=2022.8.0
+dask[dataframe]>=2022.8.0
+
+# Sentiment Analysis
+textblob>=0.17.1
+
+# Visualization
+plotly>=5.10.0
+bokeh>=2.4.0
+
+# Data Processing
+scipy>=1.9.0
+igraph>=0.9.0
+
+# Jupyter and Documentation
+jupyter>=1.0.0
+nbformat>=5.7.0
+
+# Additional ML tools
+xgboost>=1.6.0
+lightgbm>=3.3.0
+
+# Utilities
+tqdm>=4.64.0
+requests>=2.28.0

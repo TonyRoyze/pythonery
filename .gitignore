@@ -25,12 +25,22 @@ env.txt
 # Downloaded files and logs
 downloads/
 *.log
+*.docx
 
 # CSVs with course info (may contain sensitive info)
-
+*.csv
 
 # OS generated files
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
+links.html
+magnet_links.txt
+filtered*.txt
+Geo Spacial Analysis/
+ceb_load_curve_data/
+media/
+Mini Hackathon/
+StatProg/
+WebScraping/

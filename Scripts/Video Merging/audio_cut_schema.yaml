@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────
+#  Audio Cut Schema
+#  All timestamps support: seconds (float), "MM:SS", "HH:MM:SS"
+#  or "HH:MM:SS.mmm" (millisecond precision).
+#
+#  loop: N      →  repeat the segment N times (default: 1)
+#  speed: 1.5   →  1.5× faster | 0.75 → slower  (pitch preserved)
+#
+#  merge: joins named segments into one file (see bottom of file)
+# ─────────────────────────────────────────────────────────────
+
+input:
+  file: "Old MacDonald Had a Farm.m4a"
+
+output:
+  dir: "./output"          # output folder (created if missing)
+  format: "mp3"            # mp3 | wav | ogg | flac | m4a | aac
+  bitrate: "192k"          # only applies to lossy formats
+
+# Global defaults applied to every segment unless overridden.
+defaults:
+  fade_in_ms: 0
+  fade_out_ms: 0
+  normalize: false          # peak-normalize the segment to 0 dBFS
+  loop: 1                   # 1 = play once, N = play N times
+  speed: 1.0                # 1.0 = original, 1.5 = faster, 0.75 = slower
+
+# Each segment produces one output file.
+segments:
+
+  - name: "cow"
+    start: "0:35"
+    end: "0:57"
+    fade_in_ms: 100
+    fade_out_ms: 100
+
+  - name: "pig"
+    start: "1:01"
+    end: "1:23"
+    fade_in_ms: 100
+    fade_out_ms: 100
+
+  - name: "horse"
+    start: "1:52"
+    end: "2:13"
+    fade_in_ms: 100
+    fade_out_ms: 100  
+
+  - name: "chick"
+    start: "0:07"
+    end: "0:33"
+    fade_in_ms: 100
+    fade_out_ms: 100     
+
+# ─────────────────────────────────────────────────────────────
+#  Merge blocks  —  each entry joins segments into ONE file.
+#
+#  segments: ["name1", "name2"]  →  list specific segments in order
+#  segments: "all"               →  join every segment in order
+#  crossfade_ms: 200             →  smooth crossfade between joins
+#  fade_in_ms / fade_out_ms      →  applied to the final merged file
+# ─────────────────────────────────────────────────────────────
+
+merge:
+  - name: "animals_mix"                 # output filename (no extension)
+    segments: "all"
+    crossfade_ms: 100                    # 300ms crossfade between each
+    fade_in_ms: 100
+    fade_out_ms: 100
+    speed: 0.75

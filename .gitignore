@@ -30,6 +30,10 @@ downloads/
 # CSVs with course info (may contain sensitive info)
 *.csv
 
+# Audio and Video files
+*.mp3
+*.m4a
+
 # OS generated files
 Thumbs.db
 ehthumbs.db
@@ -41,6 +45,12 @@ filtered*.txt
 Geo Spacial Analysis/
 ceb_load_curve_data/
 media/
-Mini Hackathon/
+Cinnamon/
 StatProg/
 WebScraping/
+Friends/
+Map to Poster/
+Questions/
+demo/
+
+Objectives.md

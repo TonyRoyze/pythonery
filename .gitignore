@@ -55,5 +55,9 @@ Friends/
 Map to Poster/
 Questions/
 demo/
+Image Analysis/
+customer-dash/
+Credit/
 
-Objectives.md
+*.md
+!README.md

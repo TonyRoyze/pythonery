@@ -57,7 +57,9 @@ Questions/
 demo/
 Image Analysis/
 customer-dash/
-Credit/
+NLP/
+Text Extraction/
+HIV/
 
 *.md
 !README.md

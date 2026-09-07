@@ -60,6 +60,8 @@ customer-dash/
 NLP/
 Text Extraction/
 HIV/
+Raycast/
+BigData/
 
 *.md
 !README.md

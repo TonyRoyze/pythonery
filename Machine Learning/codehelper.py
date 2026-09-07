@@ -1,4 +1,4 @@
-"""Helper module: copy ML code snippets to the clipboard.
+"""Helper module: copy ML code snippets to the clipboard (or print them).
 
 Usage (in your notebook):
     from codehelper import scaler, split, mlp, metrics, metric_defs
@@ -9,8 +9,8 @@ Usage (in your notebook):
     metrics(['acc', 'pres', 'rec', 'f1'])
     metric_defs('pres')      # markdown meaning + formula
 
-Each function copies a snippet/string to the clipboard (pbcopy on macOS)
-and returns it as a string.
+On macOS/Windows the snippet is copied to the clipboard. Anywhere else
+(e.g. Colab) it is printed so you can copy it manually.
 """
 
 import shutil
@@ -18,90 +18,20 @@ import subprocess
 import sys
 
 
+def _print_snippet(text: str) -> None:
+    print(text)
+
+
 def _copy(text: str) -> None:
-    """Copy a string to the clipboard via the first available mechanism."""
-    if _copy_colab(text):
-        return
+    """Copy to clipboard on macOS/Windows, otherwise print it."""
     if sys.platform == "darwin":
         subprocess.run(["pbcopy"], input=text, text=True, check=True)
         return
     if sys.platform.startswith("win"):
         subprocess.run(["clip"], input=text, text=True, check=True)
         return
-
-    # Linux: try Wayland, then X11, then pyperclip
-    for cmd in (["wl-copy"], ["xclip", "-selection", "clipboard"], ["xsel", "-bi"]):
-        if shutil.which(cmd[0]):
-            subprocess.run(cmd, input=text, text=True, check=True)
-            return
-
-    try:
-        import pyperclip
-        pyperclip.copy(text)
-    except ImportError:
-        raise RuntimeError(
-            "No clipboard tool found. Install one via:\n"
-            "  sudo apt-get install wl-clipboard   # Wayland\n"
-            "  sudo apt-get install xclip xsel     # X11\n"
-            "  pip install pyperclip"
-        )
-
-
-def _is_colab() -> bool:
-    """Return True when running inside a Google Colab notebook."""
-    try:
-        import google.colab  # noqa: F401
-        return True
-    except ImportError:
-        pass
-    try:
-        shell = get_ipython()  # type: ignore[name-defined]
-        return shell.config.get("IPKernelApp", {}).get("parent_appname") == "colab"
-    except Exception:
-        return False
-
-
-def _copy_colab(text: str) -> bool:
-    """Copy via browser JavaScript on Google Colab. Returns False if not Colab."""
-    if not _is_colab():
-        return False
-
-    import json
-    try:
-        from google.colab import output  # type: ignore
-    except Exception as exc:
-        raise RuntimeError(f"Colab detected but google.colab unavailable: {exc}")
-
-    safe = json.dumps(text)  # proper JS string escaping
-    js = (
-        "(() => {\n"
-        "  const el = document.createElement('textarea');\n"
-        f"  el.value = {safe};\n"
-        "  el.style.position = 'fixed';\n"
-        "  el.style.opacity = '0';\n"
-        "  document.body.appendChild(el);\n"
-        "  el.focus();\n"
-        "  el.select();\n"
-        "  let ok = false;\n"
-        "  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }\n"
-        "  document.body.removeChild(el);\n"
-        "  if (!ok) { try { navigator.clipboard.writeText(" + safe + "); } catch (e) {} }\n"
-        "  return ok;\n"
-        "})()"
-    )
-    try:
-        output.eval_js(js)
-    except Exception as exc:
-        raise RuntimeError(
-            "Could not run clipboard JS in this Colab runtime. "
-            f"Underlying error: {exc}"
-        )
-    return True
-
-
-def _join_options(values: list) -> str:
-    """Turn a list into 'val1' | 'val2' ..."""
-    return " | ".join(f"'{v}'" for v in values)
+    # Linux / Colab / anything else: there is no reliable clipboard.
+    _print_snippet(text)
 
 
 def _option_list(value, valid):
@@ -115,7 +45,7 @@ def _option_list(value, valid):
 
 
 def scaler(kind: str = "std") -> None:
-    """Copy a scaler snippet. kind in {'std', 'minmax', 'robust'}."""
+    """Print a scaler snippet. kind in {'std', 'minmax', 'robust'}."""
     scalers = {
         "std": "StandardScaler",
         "minmax": "MinMaxScaler",
@@ -136,7 +66,7 @@ def scaler(kind: str = "std") -> None:
 
 def split(test_size: float = 0.25, random_state: int = 10,
           stratify: bool = False) -> None:
-    """Copy a train_test_split snippet.
+    """Print a train_test_split snippet.
     test_size is the fraction for TESTING (e.g. 0.30 => 70% train)."""
     strat = "\n    stratify=y" if stratify else ""
     snippet = (
@@ -183,7 +113,7 @@ def _alt(values: list) -> str:
 
 
 def mlp(extras: list | None = None) -> None:
-    """Copy one MLP snippet showing the union of common params across the
+    """Print one MLP snippet showing the union of common params across the
     three model papers, plus any extra params you choose.
 
     extras: list of codes that insert additional param lines, e.g.
@@ -254,7 +184,7 @@ VALID_METRICS = {
 
 
 def metrics(metric_list: list | None = None) -> None:
-    """Copy a metrics snippet for the requested metrics.
+    """Print a metrics snippet for the requested metrics.
     metric_list: list of codes, e.g. ['acc', 'pres', 'rec', 'f1'].
     Also always includes the confusion matrix plot + print.
     """
@@ -329,7 +259,7 @@ METRIC_DEFS = {
 
 
 def metric_defs(which: str | list | None = None) -> None:
-    """Copy markdown meaning + formula of each requested metric.
+    """Print markdown meaning + formula of each requested metric.
     which: single code, list of codes, or None for all."""
     if which is None:
         codes = list(METRIC_DEFS)

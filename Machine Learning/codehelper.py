@@ -13,24 +13,90 @@ Each function copies a snippet/string to the clipboard (pbcopy on macOS)
 and returns it as a string.
 """
 
+import shutil
 import subprocess
 import sys
 
 
 def _copy(text: str) -> None:
-    """Copy a string to the clipboard (macOS pbcopy, else pyperclip)."""
+    """Copy a string to the clipboard via the first available mechanism."""
+    if _copy_colab(text):
+        return
     if sys.platform == "darwin":
         subprocess.run(["pbcopy"], input=text, text=True, check=True)
-    elif sys.platform.startswith("win"):
+        return
+    if sys.platform.startswith("win"):
         subprocess.run(["clip"], input=text, text=True, check=True)
-    else:
-        try:
-            import pyperclip
-            pyperclip.copy(text)
-        except ImportError:
-            raise RuntimeError(
-                "pyperclip not installed; run `pip install pyperclip`"
-            )
+        return
+
+    # Linux: try Wayland, then X11, then pyperclip
+    for cmd in (["wl-copy"], ["xclip", "-selection", "clipboard"], ["xsel", "-bi"]):
+        if shutil.which(cmd[0]):
+            subprocess.run(cmd, input=text, text=True, check=True)
+            return
+
+    try:
+        import pyperclip
+        pyperclip.copy(text)
+    except ImportError:
+        raise RuntimeError(
+            "No clipboard tool found. Install one via:\n"
+            "  sudo apt-get install wl-clipboard   # Wayland\n"
+            "  sudo apt-get install xclip xsel     # X11\n"
+            "  pip install pyperclip"
+        )
+
+
+def _is_colab() -> bool:
+    """Return True when running inside a Google Colab notebook."""
+    try:
+        import google.colab  # noqa: F401
+        return True
+    except ImportError:
+        pass
+    try:
+        shell = get_ipython()  # type: ignore[name-defined]
+        return shell.config.get("IPKernelApp", {}).get("parent_appname") == "colab"
+    except Exception:
+        return False
+
+
+def _copy_colab(text: str) -> bool:
+    """Copy via browser JavaScript on Google Colab. Returns False if not Colab."""
+    if not _is_colab():
+        return False
+
+    import json
+    try:
+        from google.colab import output  # type: ignore
+    except Exception as exc:
+        raise RuntimeError(f"Colab detected but google.colab unavailable: {exc}")
+
+    safe = json.dumps(text)  # proper JS string escaping
+    js = (
+        "(() => {\n"
+        "  const el = document.createElement('textarea');\n"
+        f"  el.value = {safe};\n"
+        "  el.style.position = 'fixed';\n"
+        "  el.style.opacity = '0';\n"
+        "  document.body.appendChild(el);\n"
+        "  el.focus();\n"
+        "  el.select();\n"
+        "  let ok = false;\n"
+        "  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }\n"
+        "  document.body.removeChild(el);\n"
+        "  if (!ok) { try { navigator.clipboard.writeText(" + safe + "); } catch (e) {} }\n"
+        "  return ok;\n"
+        "})()"
+    )
+    try:
+        output.eval_js(js)
+    except Exception as exc:
+        raise RuntimeError(
+            "Could not run clipboard JS in this Colab runtime. "
+            f"Underlying error: {exc}"
+        )
+    return True
 
 
 def _join_options(values: list) -> str:
